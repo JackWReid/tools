@@ -1,6 +1,7 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import BracketSlot from './BracketSlot.jsx';
 import { MY_TEAM_MAP, MY_TEAM_NAMES } from '../data/teamData.js';
+import { BRACKET_TREE } from '../data/bracketData.js';
 
 const SLOT_H = 62;
 const SLOT_W = 140;
@@ -87,7 +88,50 @@ export default function BracketView({ matches, myTeamsOnly, teamFilter }) {
   const svgRef = useRef(null);
   const containerRef = useRef(null);
 
-  // SVG connector lines added in Task 10
+  useEffect(() => {
+    const svg = svgRef.current;
+    const container = containerRef.current;
+    if (!svg || !container) return;
+    svg.innerHTML = '';
+    const cr = container.getBoundingClientRect();
+
+    function slotRect(matchId) {
+      const el = container.querySelector(`[data-match-id="${matchId}"]`);
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      return {
+        left: r.left - cr.left + container.scrollLeft,
+        right: r.right - cr.left + container.scrollLeft,
+        cy: (r.top + r.bottom) / 2 - cr.top,
+      };
+    }
+
+    function drawLine(fromId, toId, color) {
+      const from = slotRect(fromId);
+      const to = slotRect(toId);
+      if (!from || !to) return;
+      const isLeft = LEFT_IDS.has(fromId);
+      const x1 = isLeft ? from.right : from.left;
+      const x2 = isLeft ? to.left : to.right;
+      const y1 = from.cy;
+      const y2 = to.cy;
+      const mx = (x1 + x2) / 2;
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', `M ${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}`);
+      path.setAttribute('stroke', color);
+      path.setAttribute('stroke-width', '1.5');
+      path.setAttribute('fill', 'none');
+      svg.appendChild(path);
+    }
+
+    for (const [idStr, { feeds, loserFeeds }] of Object.entries(BRACKET_TREE)) {
+      const id = Number(idStr);
+      const match = matchMap[id];
+      const color = match?.status === 'completed' ? '#4caf50' : '#ddd';
+      if (feeds) drawLine(id, feeds, color);
+      if (loserFeeds) drawLine(id, loserFeeds, color);
+    }
+  }, [matches, matchMap]);
 
   return (
     <div style={{ overflowX: 'auto', paddingBottom: 16 }}>
