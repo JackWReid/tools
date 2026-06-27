@@ -24,7 +24,7 @@ export default function MatchCard({ match }) {
   const hasScore = match.homeScore !== null && match.awayScore !== null;
   const winnerIsHome = isCompleted && hasScore &&
     (match.homeScore > match.awayScore || (match.homePens !== null && match.homePens > match.awayPens));
-  const winnerIsAway = isCompleted && hasScore && !winnerIsHome;
+  const winnerIsAway = isCompleted && hasScore && !winnerIsHome && match.homeScore !== match.awayScore;
   const badge = statusBadge(match.status, match.statusDetail);
 
   return (
