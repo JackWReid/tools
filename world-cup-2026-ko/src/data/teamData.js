@@ -1,5 +1,6 @@
 export const MY_TEAMS = [
   { name: 'Switzerland', flag: '🇨🇭', color: { hex: '#d4202a', rgb: '212,32,42' } },
+  { name: 'Scotland',    flag: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', color: { hex: '#003f7d', rgb: '0,63,125' } },
   { name: 'England',     flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', color: { hex: '#cf142b', rgb: '207,20,43' } },
   { name: 'Germany',     flag: '🇩🇪', color: { hex: '#1a1a1a', rgb: '26,26,26' } },
   { name: 'Norway',      flag: '🇳🇴', color: { hex: '#ef2b2d', rgb: '239,43,45' } },
@@ -44,7 +45,6 @@ export const FLAGS = {
   'Austria':               '🇦🇹',
   'Iran':                  '🇮🇷',
   'Croatia':               '🇭🇷',
-  'Germany':               '🇩🇪',
 };
 
 export const ESPN_NAME_MAP = {
