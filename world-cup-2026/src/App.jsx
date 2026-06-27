@@ -300,7 +300,10 @@ export default function WorldCup() {
       )}
 
       <div style={{ fontSize: 11, color: "#ccc", textAlign: "center", marginTop: 24, paddingTop: 16, borderTop: "1px solid #f0f0f0" }}>
-        Group stage ends 28 June · Knockout fixtures to be added
+        Group stage ends 28 June ·{' '}
+        <a href="/world-cup-2026-ko/" style={{ color: '#bbb', textDecoration: 'none' }}>
+          Knockout tracker →
+        </a>
       </div>
     </div>
   );

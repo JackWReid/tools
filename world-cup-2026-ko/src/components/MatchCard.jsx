@@ -3,9 +3,9 @@ import { MY_TEAM_MAP, FLAGS } from '../data/teamData.js';
 function statusBadge(status, statusDetail) {
   if (status === 'live') return { text: 'Live', bg: '#ff6b00', color: '#fff' };
   if (status === 'completed') {
-    const d = statusDetail ?? '';
-    if (d.includes('PEN') || d.includes('Penalt')) return { text: 'Pen', bg: '#e8f5e9', color: '#2e7d32' };
-    if (d.includes('AET') || d.includes('Extra')) return { text: 'AET', bg: '#e8f5e9', color: '#2e7d32' };
+    const d = (statusDetail ?? '').toLowerCase();
+    if (d.includes('pen') || d.includes('shoot')) return { text: 'Pen', bg: '#e8f5e9', color: '#2e7d32' };
+    if (d.includes('aet') || d.includes('extra') || d.includes('overtime')) return { text: 'AET', bg: '#e8f5e9', color: '#2e7d32' };
     return { text: 'FT', bg: '#e8f5e9', color: '#2e7d32' };
   }
   return null;
