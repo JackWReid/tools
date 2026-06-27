@@ -1,5 +1,7 @@
 import { MY_TEAM_MAP, FLAGS } from '../data/teamData.js';
 
+const ROUND_PILL = { R32: 'R32', R16: 'R16', QF: 'QF', SF: 'SF', '3rd': '3rd', F: 'Final' };
+
 function statusBadge(status, statusDetail) {
   if (status === 'live') return { text: 'Live', bg: '#ff6b00', color: '#fff' };
   if (status === 'completed') {
@@ -11,7 +13,7 @@ function statusBadge(status, statusDetail) {
   return null;
 }
 
-export default function MatchCard({ match }) {
+export default function MatchCard({ match, showRound = false }) {
   const homeMyTeam = MY_TEAM_MAP[match.homeTeam];
   const awayMyTeam = MY_TEAM_MAP[match.awayTeam];
   const topTeam = homeMyTeam ?? awayMyTeam ?? null;
@@ -59,6 +61,12 @@ export default function MatchCard({ match }) {
           {match.awayTeam ?? match.awayDesc}
         </span>
       </div>
+      {showRound && ROUND_PILL[match.round] && (
+        <div style={{ fontSize: 11, padding: '2px 7px', borderRadius: 999,
+          background: '#f0f0f0', color: '#888', fontWeight: 600, flexShrink: 0, whiteSpace: 'nowrap' }}>
+          {ROUND_PILL[match.round]}
+        </div>
+      )}
       {badge && (
         <div style={{ fontSize: 11, padding: '2px 8px', borderRadius: 999,
           background: badge.bg, color: badge.color, fontWeight: 700, flexShrink: 0 }}>
