@@ -4,7 +4,7 @@ main = "index.ts"
 
 [[kv_namespaces]]
 binding = "WC2026"
-id = "REPLACE_WITH_KV_ID"
+id = "f4a0f410463b461eb8350928378e584d"
 
 [[routes]]
 pattern = "api.really.lol/wc2026"
