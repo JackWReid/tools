@@ -3,6 +3,7 @@ import { BRACKET_SKELETON } from './data/bracketData.js';
 import { MY_TEAMS, MY_TEAM_NAMES } from './data/teamData.js';
 import { mergeLiveData } from './utils/mergeData.js';
 import ListView from './components/ListView.jsx';
+import BracketView from './components/BracketView.jsx';
 
 const WORKER_URL = 'https://api.really.lol/wc2026';
 
@@ -157,7 +158,7 @@ export default function App() {
           : <ListView matches={filtered} />
       )}
       {view === 'bracket' && (
-        <div style={{ padding: '20px 0', color: '#aaa', fontSize: 14 }}>Bracket coming in Task 9</div>
+        <BracketView matches={matches} myTeamsOnly={myTeamsOnly} teamFilter={teamFilter} />
       )}
 
       <div style={{ fontSize: 11, color: '#ccc', textAlign: 'center', marginTop: 24, paddingTop: 16, borderTop: '1px solid #f0f0f0' }}>
