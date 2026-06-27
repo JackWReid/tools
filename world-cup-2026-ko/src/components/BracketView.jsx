@@ -131,7 +131,7 @@ export default function BracketView({ matches, myTeamsOnly, teamFilter }) {
       if (feeds) drawLine(id, feeds, color);
       if (loserFeeds) drawLine(id, loserFeeds, color);
     }
-  }, [matches, matchMap]);
+  }, [matches]);
 
   return (
     <div style={{ overflowX: 'auto', paddingBottom: 16 }}>
